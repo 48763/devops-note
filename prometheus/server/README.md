@@ -20,4 +20,4 @@ $ docker run -p 9090:9090 --name prometheus \
 http://127.0.0.1:9090
 ```
 
-<img src="../img/prometheus-02.png" alt="prometheus" height="100%" width="100%">
+<img src="../../img/prometheus/prometheus-02.png" alt="prometheus" height="100%" width="100%">
