@@ -1,0 +1,17 @@
+groups:
+  - name: test
+    interval: 10s
+    rules:
+    - record: http_request
+      expr: sum(prometheus_http_request_duration_seconds_bucket{handler="/",job="prometheus"})
+
+  - name: test-2
+    rules:
+    - alert: http_request_2
+      expr:  sum(prometheus_http_request_duration_seconds_bucket{handler="/",job="prometheus"}) > 10
+      for: 10m
+      labels:
+        severity: page
+      annotations:
+        description: http route access times
+        summary: http
