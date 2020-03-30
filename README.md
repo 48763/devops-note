@@ -34,7 +34,7 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
     - [*Python]()
     - [C](./program/c/)
 - [作業系統](./operating-system#作業系統)
-    - [*網路]()
+    - [網路](./operating-system/network)
         - [CCNA](https://github.com/48763/CCNA)
         - [防火牆](./service/firewall)
     - [性能](./server/performance#performance)
