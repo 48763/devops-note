@@ -1,6 +1,6 @@
 # OSX on KVM
 
-## 需求
+## 實驗環境：
 
 - OS：Ubuntu 18.04 Desktop
 
