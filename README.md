@@ -26,7 +26,7 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
     - [Logstash](./elk/logstash)
     - [Kibana](./elk/kibana)
 - [Prometheus](./prometheus)
-    - [Prom-client](https://github.com/48763/ex-prom-client)
+    - [Prom-client](https://github.com/48763/prom-client-ex)
     - [Grafana](./prometheus/grafana)
 - [Jenkins](./Jenkins/#jenkins)
 - [程式](./program)
