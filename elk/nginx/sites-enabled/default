@@ -1,0 +1,24 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        log_format timed_combined '[$time_iso8601] '
+                '$remote_addr:$remote_port $remote_user [$server_port] '
+                '"$request" $request_length $status '
+                '"$request_uri" "$request_filename" "$query_string" '
+                '$http_referer "$http_user_agent" $cookie_name '
+                '$request_time $upstream_response_time $pipe $request_completion '
+                '$bytes_sent $body_bytes_sent';
+
+        access_log /var/log/nginx/lab-host.log timed_combined;
+
+        server_name localhost;
+        
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+}

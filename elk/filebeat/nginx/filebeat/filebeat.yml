@@ -1,0 +1,29 @@
+filebeat.inputs:
+  enabled: false
+
+filebeat.config:
+  inputs:
+    enabled: true
+  modules:
+    enabled: true
+
+
+filebeat.modules:
+- module: nginx
+  access:
+    enabled: true
+    var.paths: ["/var/log/nginx/access.log*"]
+    var.paths: ["/var/log/nginx/dev/access/*.log"]
+    var.paths: ["/var/log/nginx/main/access/*.log"]
+    var.paths: ["/var/log/nginx/test/access/*.log"]
+  error:
+    enabled: true
+    var.paths: ["/var/log/nginx/error.log*"]
+
+output.logstash:
+  enabled: true
+  hosts: ["192.168.200.57:18081"]
+  backoff.init: 3
+  backoff.max: 60
+  bulk_max_size: 16384
+  ssl.enabled: false
