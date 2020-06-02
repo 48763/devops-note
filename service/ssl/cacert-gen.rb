@@ -24,7 +24,13 @@ class Cacert_gen
     )
 
     certs.select do |cert|
-      (openssldir/"cert.pem").write(cert+"\n", mode: 'a')
+      IO.popen("openssl x509 -inform pem -checkend 0 -noout >/dev/null", "w") do |openssl_io|
+        openssl_io.write(cert)
+        openssl_io.close_write
+      end
+        if ($?.success?)
+          (openssldir/"cert.pem").write(cert+"\n", mode: 'a')
+        end
     end
   end
 
