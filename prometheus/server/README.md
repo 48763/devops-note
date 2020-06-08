@@ -1,13 +1,13 @@
 # Server
 
-## Table of contents
-- [Installation](./#installation)
-- [Data model](./data-model.md)
-- [Metric types](./metric-types.md)
-- [Collect Docker metrics](./collect-docker-metrics.md)
-- [Config](./config)
+## 目錄
+- [啟用服務](./#installation)
+- [數據模型](./data-model.md#數據模型)
+- [指標類型](./metric-types.md#指標metrics類型)
+    - [收集 Docker 指標](./collect-docker-metrics.md)
+- [配置檔](./config)
 
-## Installation
+## 啟用服務
 
 ```bash
 $ docker run -p 9090:9090 --name prometheus \
