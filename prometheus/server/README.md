@@ -1,7 +1,7 @@
 # Server
 
 ## 目錄
-- [啟用服務](./#installation)
+- [啟用服務](./#啟用服務)
 - [數據模型](./data-model.md#數據模型)
 - [指標類型](./metric-types.md#指標metrics類型)
     - [收集 Docker 指標](./collect-docker-metrics.md)
@@ -15,7 +15,8 @@ $ docker run -p 9090:9090 --name prometheus \
     -d prom/prometheus
 ```
 
-**Access web**
+訪問頁面：
+
 ```
 http://127.0.0.1:9090
 ```
