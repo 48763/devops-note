@@ -1,0 +1,19 @@
+groups:
+  - name: test
+    rules:
+    - alert: http_request
+      expr:  sum(prometheus_http_request_duration_seconds_bucket{handler="/",job="prometheus"}) > 10
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: http route access times
+        summary: http
+    - alert: InstanceDown
+      expr: up == 1
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        summary: "Instance {{ $labels.instance }} down"
+        description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
