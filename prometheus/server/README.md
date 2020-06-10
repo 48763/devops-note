@@ -11,7 +11,8 @@
 
 ```bash
 $ docker run -p 9090:9090 --name prometheus \
-    -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+    -v $(pwd)/config/prometheus.yml:/etc/prometheus/prometheus.yml \
+    -v $(pwd)/config/rules.yml:/etc/prometheus/rules.yml \
     -d prom/prometheus
 ```
 
