@@ -1,0 +1,8 @@
+# Whether or not to notify about resolved alerts.
+send_resolved:  true
+
+api_url: "https://hooks.slack.com/services/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"
+
+# The channel or user to send notifications to.
+channel: "#alerting"
+username: "Grafana"

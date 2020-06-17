@@ -10,7 +10,7 @@
 ## Installation 
 ```bash
 $ docker run -p 9093:9093 --name alertmanager \
-    -v $(pwd)/config.yml:/etc/alertmanager/config.yml \
+    -v $(pwd)/config/alertmanager.yml:/etc/alertmanager/alertmanager.yml \
     -d prom/alertmanager
 ```
 
