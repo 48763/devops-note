@@ -23,3 +23,17 @@ $ docker run --name grafana\
     -e "GF_SECURITY_ADMIN_PASSWORD=P@s2W0rD" \
     -d grafana/grafana
 ```
+
+## Variable syntax
+
+### Query
+
+```
+up{job="sit"}
+```
+
+### Regex
+
+```
+/.*instance="([^"]*).*/
+```
