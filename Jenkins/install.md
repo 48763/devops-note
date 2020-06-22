@@ -45,7 +45,7 @@ $ wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bi
 $ sudo mkdir /usr/lib/jdk
 $ sudo tar xvf openjdk-11.0.2_linux-x64_bin.tar.gz -C /usr/lib/jdk
 $ sudo vi /etc/environment
-    /usr/lib/jdk/jdk-11/bin
+    PATH='/bin:/usr/bin:/sbin:/usr/sbin:/usr/lib/jdk/jdk-11/bin'
     JAVA_HOME="/usr/lib/jdk/jdk-11"
 $ source /etc/environment
 ```
@@ -78,6 +78,18 @@ $ sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/so
 $ sudo apt-get update
 $ sudo apt-get install jenkins
 ```
+
+> 如果安裝 jenkins 遇到：
+> ```bash
+> Jun 22 09:49:07 it-monitor jenkins[1729]: ERROR: No Java executable found in current PATH: /bin:/usr/bin:/sbin:/usr/sbin
+> ```
+> 在確定有安裝正確版本的 java 後，可以到 `/etc/init.d/jenkins` 修改 PATH
+>
+> 再執行下面指令：
+> ```
+> $ sudo systemctl daemon-reload
+> $ sudo systemctl start jenkins
+> ```
 
 #### Jenkins 下載：
 
