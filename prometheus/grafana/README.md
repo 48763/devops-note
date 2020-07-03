@@ -37,3 +37,13 @@ up{job="sit"}
 ```
 /.*instance="([^"]*).*/
 ```
+
+## Password change
+
+```
+$ grafana-cli --config "/etc/configuration/" admin reset-admin-password mynewpassword
+```
+
+## 參考 
+
+- [grafana-cli-command-syntax](https://grafana.com/docs/grafana/latest/administration/cli/#grafana-cli-command-syntax)
