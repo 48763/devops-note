@@ -36,6 +36,19 @@ GET filebeat*/_search
 ### 聚合（aggregations）
 允許在數據上生成複雜的可視圖表。它很像 SQL 的 GROUP BY 。
 
+### 查看配置
+
+```
+curl "localhost:9200/_nodes/settings?pretty=true"
+```
+
+
+### 套件安裝
+
+```
+./bin/elasticsearch-plugin install -b https://github.com/vvanholl/elasticsearch-prometheus-exporter/releases/download/7.7.0.0/prometheus-exporter-7.7.0.0.zip
+```
+
 ### 參考資料
 [Elasticsearch 權威指南](https://es.xiaoleilu.com)、
 [Elasticsearch official](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
