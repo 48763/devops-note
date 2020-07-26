@@ -1,4 +1,0 @@
-- targets:
-  - 'lab.yukifans.com:9100'
-  labels:
-    evn: 'sit'
