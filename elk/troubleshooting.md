@@ -1,3 +1,18 @@
+## elasticsearch
+
+### health
+
+```
+$ curl -s localhost:9200/_cluster/health?pretty
+```
+
+```
+$ curl -s localhost:9200/_cluster/health/level=indices?pretty
+```
+
+```
+$ curl -s localhost:9200/_cluster/reroute?retry_failed
+```
 
 ## logstash
 
