@@ -73,7 +73,7 @@ $ update-alternatives --list javac
 下面指令為穩定版安裝，如果要安裝最新版，將網址的 `-stable` 拿掉即可。
 
 ```
-$ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins-ci.org.key | sudo apt-key add -
+$ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 $ sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 $ sudo apt-get update
 $ sudo apt-get install jenkins
