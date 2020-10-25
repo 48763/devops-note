@@ -23,7 +23,7 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
         - [Cluster](./virtualization/container/cluster/)
             - [Swarm](./virtualization/container/cluster/swarm/)
             - [Kubernetes](./virtualization/container/cluster/kubernetes/)
-        - [Repository](./virtualization/repository/)
+        - [Repository](./virtualization/container/repository/)
             - [distribution](./virtualization/container/repository/distribution/)
             - [Harbor](./virtualization/container/repository/harbor/)
 - [ELK](./elk)
