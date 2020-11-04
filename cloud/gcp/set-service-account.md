@@ -1,5 +1,3 @@
-
-
 ```bash
 $ gcloud config configurations create odin
 ```
