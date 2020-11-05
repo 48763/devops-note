@@ -16,7 +16,7 @@ $ gcloud compute instances create first-vm \
 > --can-ip-forward
 
 - [Zone](#zone)
-- [OS](#os)
+- [OS](#operating-system-details)
 - [Disk](#disk)
 - [Machine Type](#machine-type)
 
