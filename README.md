@@ -14,7 +14,7 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
 - [雲端](./cloud)
     - [GCP](./cloud/gcp)
     - [阿里雲](./cloud/aliyun)
-- [*Terraform]()
+- [*Terraform](https://github.com/48763/terraform-note)
 - [虛擬化應用](./virtualization)
     - [KVM](./virtualization/kvm/)
     - [ESXi](./virtualization/esxi/)
