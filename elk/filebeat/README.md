@@ -1,18 +1,13 @@
-## filebeat
-![](https://i.imgur.com/QZB0q6I.png)
+# <img src="../img/filebeat/img-01.jpg" alt="filebeat-logo" width="5%"></a>  filebeat
 
-安裝要發送日誌到 *Logstash* 的用戶端， *Filebeat* 為日誌傳送代理，利用 `lumberjack networking protocol` 與 *Logstash* 進行溝通。
+Filebeat 是用於轉發和集中化日誌數據的輕量級轉送程序，安裝在服務器當作代理器。其監控特定的日誌檔案或是位置，收集日誌事件和並將其轉發至其它的 *Elasticsearch* 或 *Logstash* 進行索引。
 
-[lumberjack networking protocol](https://github.com/elastic/logstash-forwarder/blob/master/PROTOCOL.md)
-### 什麼是 beat
-Beats 是輕量級（資源高效，無依賴性，小型）和開源蒐集服務 log 的集合，它們充當安裝在基礎架構中不同服務器上的代理，用於收集 logs 或 metrics。
-
-### filebeat
-Filebeat 是屬於 Beats 系列的*日誌托運商*：一組輕量級托運人，用於將不同種類的數據傳輸到 ELK 進行分析。每個 beat 專門用於傳送不同類型的信息，如：Winlogbeat 提供 Windows 事件日誌，Metricbeat 提供主機指標等等。顧名思義，Filebeat會發送日誌文件。
+Filebeat 工作方式如下：當啟用時，將啟動一個或多個輸入來查找指定的日誌數據位置。對於每個日誌的定位，都會啟動一個收集器，每個收集器讀取單一日誌以獲取內容，以及發送新日誌數據到 *libbeat*，該應用會整合事件和傳送數據到所配置的 Filebeat。
 
 > 如果輸出 Logstash 或 Elasticsearch 有讀取問題時（大量日誌），Filebeat 會減慢文件的讀取速度。
 
-### Install Filebeat on Dockek
+## 在 Docker 中運行
+
 ```bash
-$ sudo docker pull docker.elastic.co/beats/filebeat:6.2.4
+$ docker run -d  docker.elastic.co/beats/filebeat:6.2.4
 ```

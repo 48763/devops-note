@@ -1,4 +1,5 @@
-## What are Beats
+## Beats
+
 Beats 是輕量級（資源高效，無依賴性，小型）和開源蒐集服務 log 的集合，它們充當安裝在基礎架構中不同服務器上的代理，用於收集 logs 或 metrics。
 這些可以是日誌文件（Filebeat），網絡數據（Packetbeat），服務器度量標準（Metricbeat）或 Elastic 和[社群](https://www.elastic.co/guide/en/beats/libbeat/master/community-beats.html)正在開發的越來越多的 Beats 可以收集的任何其他類型的數據。
 收集完成後，數據直接發送到 Elasticsearch 或 Logstash 以進行額外處理。

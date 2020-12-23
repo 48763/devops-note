@@ -1,5 +1,5 @@
-## elasticsearch
-![](https://i.imgur.com/VBpAfdC.png)
+# <img src="../img/elasticsearch/img-01.jpg" alt="elasticsearch-logo" width="10%"></a>  elasticsearch
+
 
 1. 由 Java 構建，被歸類為 [NoSQL](https://www.ithome.com.tw/news/92507) 數據庫（非結構化的方式存儲數據）。
 2. 一個分散式、具 *RESTful* 分隔的搜索和數據分析引擎。

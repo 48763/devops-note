@@ -22,6 +22,7 @@ ELK 是指 *ElasticSearch* 、 *Logstash* 和 *Kibana* 三個 open-source 的集
 - [Logstash](./logstash)
 - [Elasticsearch](./elasticsearch)
 - [Kibana](./kibana)
+- [故障排除](./troubleshooting.md)
 
 ## ELK 安裝
 
