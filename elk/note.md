@@ -1,0 +1,2 @@
+- [Heap size settingsedit](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#heap-size-settings)
+- [GC logging settingsedit](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#gc-logging)
