@@ -9,5 +9,5 @@ Filebeat 工作方式如下：當啟用時，將啟動一個或多個輸入來�
 ## 在 Docker 中運行
 
 ```bash
-$ docker run -d  docker.elastic.co/beats/filebeat:6.2.4
+$ docker run  -d docker.elastic.co/beats/filebeat:6.2.4
 ```
