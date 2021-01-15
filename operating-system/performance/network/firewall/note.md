@@ -1,12 +1,12 @@
 # Note
 
-## mangle
+## Mangle
 
 主要用於修改資料包的 TOS（Type Of Service，服務型別）、TTL（Time To Live，生存週期）指以及為資料包設定 Mark 標記，以實現 Qos(Quality Of Service，服務質量)調整以及策略路由等應用，由於需要相應的路由裝置支援，因此應用並不廣泛。
 
 表對應的核心模組為 iptable_mangle。
 
-## raw
+## Raw
 
 自 1.2.9 以後版本的 iptables 新增的表，主要用於決定資料包是否被狀態跟蹤機制處理。在匹配資料包時，raw 表的規則要優先於其他表。
 
@@ -16,3 +16,10 @@ raw 表對應的核心模組為 iptable_raw
 
 
 [Docker firewall](https://blog.csdn.net/taiyangdao/article/details/88844558)
+
+
+## Restrict connection
+
+```
+$ iptables -A INPUT -p tcp --syn --dport 8080 -m connlimit --connlimit-above 200 -j DROP
+```

@@ -9,7 +9,7 @@ ts=`date "+%Y%m%d%H"`
 
 cat <<EOF > $GCP_ZONE
 \$TTL 300
-@ IN SOA ns-cloud-d1.googledomains.com. hostmaster.sit.silkrode.com.tw. ( 
+@ IN SOA ns-cloud-d1.googledomains.com. hostmaster.yukifans.com. ( 
 		$ts			; Serial
 		10800		; Refresh
 		3600		; Retry
