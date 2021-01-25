@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xuo pipefail
-WORKDIR="./ccdns"
-PIDFILE="${WORKDIR}/pid"
+# Import
+. ./shell.conf
 
 if [ ! -d ${WORKDIR} ]; then
     mkdir ${WORKDIR}
@@ -29,18 +29,14 @@ else
     fi
 fi
 
-FOLDERPATH=$(dirname $(readlink -f $0))
-GCP_ZONE="${WORKDIR}/gcp.zone"
-gcp=""
-
-cp ${FOLDERPATH}/{gcp.zone} ${WORKDIR}
+cp ${ZONEDIR}/*.zone ${WORKDIR}
 
 ts=$(date "+%Y%m%d%H")
 
-for proj in $(cat ${FOLDERPATH}/project.list)
+for proj in ${PROJECTS}
 do
 
-    gcp="${gcp}$(gcloud compute instances list --format="[no-heading](NAME,INTERNAL_IP)" --project ${proj} \
+    gcp="${gcp}$(gcloud compute instances list --format="[no-heading](NAME,EXTERNAL_IP)" --project ${proj} \
         | awk '!/gke/ {
             if ($2~"[0-9]+")
                 n=split($2, ip, ",");
@@ -67,25 +63,4 @@ echo -e "\n${gcp}" >> ${GCP_ZONE}
 
 sed -i "s/%%ts%%/$ts/" ${GCP_ZONE}
 
-healthcheck() {
-    if [ 0 -ne ${1} ]; then
-        ./slack.sh -u CheckDomain \
-            -c "operation-alert" \
-            -T "Update dns record" \
-            -s "error" \
-            -p "Oops! OP" \
-            -t "Google cloud dns update faile at ${2}."
-    else
-        rename zone zone.prev ${2}
-    fi
-}
-
-gcloud dns record-sets import ${GCP_ZONE} \
-    --zone gcp-domain-com-tw \
-    --delete-all-existing \
-    --replace-origin-ns \
-    --zone-file-format \
-    --project <project-id>
-healthcheck ${?} ${GCP_ZONE}
-
-rm ${WORKDIR}/pid
+rm ${PIDFILE}
