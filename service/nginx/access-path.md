@@ -28,6 +28,9 @@ location /instances {
 > - redirect：永久轉址 http 代碼 307。
 > - permanen：臨時轉址 http 代碼 301。
 
+> - ^：從頭比對
+> - ^~：前綴匹配
+
 ## alias
 
 訪問 `/instances` 時，其代表 `/usr/share/nginx/html/`：
