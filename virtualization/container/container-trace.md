@@ -20,3 +20,17 @@ $ kubectl get -A pods \
 ```
 $ docker inspect --format "{{.Id}} {{.State.Pid}}" $(sudo docker ps -aq) | grep 7564
 ```
+
+```
+$ nsenter -t 7564 -n
+$ ip addr
+```
+
+```
+$ kubectl get service -n kube-system kube-dns
+$ nsenter -t 7564 -n dig <domain-name> <@dns-ip>
+```
+
+```
+$ conntrack -L
+```
