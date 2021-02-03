@@ -1,6 +1,6 @@
 #!/bin/bash
 PLUGIN_PATH="/usr/share/elasticsearch/bin/elasticsearch-plugin"
-GCP_DOMAIN=".gcp.silkrode.com.tw"
+GCP_DOMAIN=".gcp.domain.com.tw"
 
 echo > fail.txt
 for proj in `gcloud projects list --format="[no-heading](PROJECT_ID)"`
@@ -9,7 +9,7 @@ do
 	do
 		echo "Try into $pc of $proj".
 		
-		ping -c 1 -w 1 $pc$GCP_DOMAIN > /dev/null 2>&1
+		nc -z -w 1 $pc$GCP_DOMAIN 22 > /dev/null 2>&1
 
 		if [ $? -eq 0 ]; then
 			ssh -t $pc$GCP_DOMAIN "
