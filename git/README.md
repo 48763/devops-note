@@ -5,6 +5,13 @@ $ git clone <repo>
 ```
 
 ```
+$ git remote add <remote_nickname> <repo>
+$ git remote -v
+$ git fetch <remote_nickname>
+$ git remote rename <old_remote_nickname> <new_remote_nickname>
+```
+
+```
 $ git add .
 ```
 
