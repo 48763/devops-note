@@ -28,6 +28,11 @@ $ kubectl get pods \
     -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.name}{"\n"}'
 ```
 
+$ kubectl get pods \
+    --all-namespaces \
+    --field-selector spec.nodeName=gke-prod-video-k8s-hk-01-video-pool-01c2b8e8-kvql \
+    -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.name}{"\n"}'
+
 ## 轉發端口位置
 
 ```
