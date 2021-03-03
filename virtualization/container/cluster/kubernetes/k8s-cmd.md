@@ -38,3 +38,9 @@ $ kubectl get pods \
 ```
 $ kubectl port-forward [-n <namespace_name>|-A] svc/<service_name> <local_port_number>:<service_port_number>
 ```
+
+## Decode base64 
+
+```
+$ kubectl get -n <namespace_name> secret <secret_name> -o jsonpath={.data.token} | base64 -d && echo 
+```
