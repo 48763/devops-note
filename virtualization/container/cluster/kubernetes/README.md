@@ -121,9 +121,7 @@ $ sudo swapoff -a && sudo sysctl -w vm.swappiness=0
 $ sudo modprobe br_netfilter
 ```
 
-
 Even if kubelet already has the containerd socket configured, kubeadm also needs to be pointed at the CRI socket of containerd to dispatch all runtime related operations to containerd (eg. pulling Kubernetes images).
-
 
 ```
 kubeadm init --ignore-preflight-errors=all --cri-socket /run/containerd/containerd.sock --pod-network-cidr=10.211.0.0/16
