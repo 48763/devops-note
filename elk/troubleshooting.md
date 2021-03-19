@@ -1,6 +1,8 @@
+# 錯誤排除
+
 ## elasticsearch
 
-### health
+### cluster health
 
 ```
 $ curl -s localhost:9200/_cluster/health?pretty
@@ -12,6 +14,32 @@ $ curl -s localhost:9200/_cluster/health/level=indices?pretty
 
 ```
 $ curl -s -X POST localhost:9200/_cluster/reroute?retry_failed
+```
+
+### nodes states
+
+```
+$ curl -XGET http://localhost:9200/_nodes/states?pretty
+{
+  "_nodes" : {
+    "total" : 0,
+    "successful" : 0,
+    "failed" : 0
+  },
+  "cluster_name" : "docker-cluster",
+  "nodes" : { }
+}
+```
+
+```
+$ curl -XGET http://localhost:9200/_nodes/stats?pretty
+
+```
+
+```
+$ curl -XGET http://localhost:9200/_cat/nodes?v   
+ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
+127.0.0.1           65          74  12    0.93    0.55     0.54 mdi       *      Bp-7DGu
 ```
 
 ## logstash
