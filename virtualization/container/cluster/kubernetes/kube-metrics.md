@@ -70,7 +70,7 @@ $ curl localhost:10248/healthz
 ```
 
 ```
-$ https://localhost:10250/healthz \
+$ curl https://localhost:10250/healthz \
     --header "Authorization: Bearer ${TOKEN}" \
     -ks
 ```
