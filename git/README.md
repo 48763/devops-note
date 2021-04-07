@@ -20,6 +20,11 @@ $ git commit -m "Update some file."
 ```
 
 ```
+$ git pull 
+$ git pull <remote_nickname> <branch>
+```
+
+```
 $ git push 
 $ git push -u origin <branch>
 ```
