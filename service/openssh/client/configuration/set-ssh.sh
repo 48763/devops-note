@@ -14,7 +14,7 @@ if [ -z $3 ];
 	echo "	Directory value is [main|dev|test]."
 	echo "	Hostname is for ssh when connect remote host."
 	echo "	Address is ip-address of target host."
-    exit 0
+    exit 1
 fi
 
 ##
@@ -28,7 +28,7 @@ echo "Host $2" >> config
 echo "
 Host $2
 	HostName $3
-	User beladmin
+	User root
 	IdentityFile ~/.ssh/key/$1/$2" >> conf.d/$1.conf
 
 ##
