@@ -2,7 +2,7 @@
 
 ## 列表
 
-- [rename.sh](#rename)
+- [rename](#rename)
 - 
 - 
 
