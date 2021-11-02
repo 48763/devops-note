@@ -22,7 +22,7 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
         - [@Docker](https://github.com/48763/docker-tutorial)
         - [Cluster](./virtualization/container/cluster/)
             - [Swarm](./virtualization/container/cluster/swarm/)
-            - [Kubernetes](./virtualization/container/cluster/kubernetes/)
+            - [Kubernetes](./virtualization/container/cluster/kubernetes/) 
         - [Repository](./virtualization/container/repository/)
             - [distribution](./virtualization/container/repository/distribution/)
             - [Harbor](./virtualization/container/repository/harbor/)
@@ -51,6 +51,8 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
 - [作業系統](./operating-system#作業系統)
     - [Linux](./operating-system/linux)
         - [cmd](./operating-system/linux/cmd)
+        - [shell](./operating-system/linux/shell)
+        - [自撰腳本目錄](./operating-system/linux/shell-script)
     - [效能分析](./operating-system/analysis/)
         - [*中央處理器](./operating-system/analysis/cpu/)
         - [記憶體](./operating-system/analysis/memory/)
@@ -66,4 +68,4 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
     - [SQL](./service/sql)
     - [SSL](./service/ssl)
     - [vsftp](./service/vsftp/vsftp.md), [@on docker](https://github.com/48763/vsftpd-on-docker)
-- [應用腳本](./operating-system/linux/shell)
+
