@@ -1,0 +1,29 @@
+#!/bin/bash
+LIMA_YAML_HOME="${HOME}/.lima/_yaml"
+
+if [ ${#} -lt 1 ]; then
+    echo "YAML_PATH=""; lmc vm_name"
+    exit 1
+fi 
+
+if [ ! "${YAML_PATH}" ]; then 
+    YAML_PATH="${LIMA_YAML_HOME}/${1}.yaml"
+fi
+
+if [ ! "${YAML_PATH%/*}" = "${LIMA_YAML_HOME}" ]; then 
+    cp ${YAML_PATH} ${LIMA_YAML_HOME}/${1}.yaml
+    YAML_PATH="${LIMA_YAML_HOME}/${1}.yaml"
+else
+    cp ${LIMA_YAML_HOME}/template.yaml ${YAML_PATH}
+fi
+
+limactl validate ${YAML_PATH} &> /dev/null
+if [ ${?} -ne 0 ]; then
+    limactl validate ${YAML_PATH}
+fi
+
+limactl start ${YAML_PATH}
+rm ${YAML_PATH}
+
+PORT=$(limactl show-ssh ${1} --format=args | grep -Eo "[[:digit:]]*$")
+echo "ssh lima-${1} -p ${PORT}"

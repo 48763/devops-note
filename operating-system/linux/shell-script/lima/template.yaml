@@ -1,0 +1,135 @@
+# ===================================================================== #
+# BASIC CONFIGURATION
+# ===================================================================== #
+
+arch: "default"
+images:
+  - location: "~/Downloads/impish-server-cloudimg-amd64.img"
+    arch: "x86_64"
+  - location: "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+    arch: "x86_64"
+  - location: "~/Downloads/impish-server-cloudimg-arm64.img"
+    arch: "aarch64"
+  - location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.img"
+    arch: "aarch64"
+
+# Performance setting.
+cpus: 4
+memory: "4GiB"
+disk: "64GiB"
+
+# Expose host directories to the guest, the mount point might be accessible from all UIDs in the guest
+mounts:
+  - location: "/tmp/lima"
+    writable: true
+
+ssh:
+  # A localhost port of the host.
+  localPort: 0
+  loadDotSSHPubKeys: true
+  forwardAgent: false
+
+containerd:
+  system: false
+  # Default: true
+  user: true
+#  # Override containerd archive
+#  # Default: hard-coded URL with hard-coded digest (see the output of `limactl info | jq .defaultTemplate.containerd.archives`)
+#  archives:
+#    - location: "~/Downloads/nerdctl-full-X.Y.Z-linux-amd64.tar.gz"
+#      arch: "x86_64"
+#      digest: "sha256:..."
+
+provision:
+#    "Mode: user" is executed without the root privilege
+   - mode: system
+     script: |
+       #!/bin/bash
+       set -eux -o pipefail
+       export DEBIAN_FRONTEND=noninteractive
+       echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
+         | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+       apt-get install -y apt-transport-https ca-certificates gnupg
+       curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+         | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+       apt-get update && apt-get install -y google-cloud-sdk
+       echo "if [ -f '/usr/local/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.bash.inc'; fi" \
+         >> .profile 
+# probes:
+#  # Only `readiness` probes are supported right now.
+#  - mode: readiness
+#    description: vim to be installed
+#    script: |
+#       #!/bin/bash
+#       set -eux -o pipefail
+#       if ! timeout 30s bash -c "until command -v vim; do sleep 3; done"; then
+#         echo >&2 "vim is not installed yet"
+#         exit 1
+#       fi
+#    hint: |
+#      vim was not installed in the guest. Make sure the package system is working correctly.
+#      Also see "/var/log/cloud-init-output.log" in the guest.
+
+firmware:
+  legacyBIOS: false
+
+video:
+  # QEMU display, e.g., "none", "cocoa", "sdl", "gtk".
+  display: "none"
+
+networks:
+  # Lima can manage daemons for networks defined in $LIMA_HOME/_config/networks.yaml
+  # automatically. Both vde_switch and vde_vmnet binaries must be installed into
+  # secure locations only alterable by the "root" user.
+  # - lima: shared
+  #   # MAC address of the instance; lima will pick one based on the instance name,
+  #   # so DHCP assigned ip addresses should remain constant over instance restarts.
+  #   macAddress: ""
+  #   # Interface name, defaults to "lima0", "lima1", etc.
+  #   interface: ""
+  #
+  # Lima can also connect to "unmanaged" vde networks addressed by "vnl". This
+  # means that the daemons will not be controlled by Lima, but must be started
+  # before the instance.  The interface type (host, shared, or bridged) is
+  # configured in vde_vmnet and not in lima.
+  # vnl (virtual network locator) points to the vde_switch socket directory,
+  # optionally with vde:// prefix
+  # - vnl: "vde:///var/run/vde.ctl"
+  #   # VDE Switch port number (not TCP/UDP port number). Set to 65535 for PTP mode.
+  #   # Default: 0
+  #   switchPort: 0
+  #   # MAC address of the instance; lima will pick one based on the instance name,
+  #   # so DHCP assigned ip addresses should remain constant over instance restarts.
+  #   macAddress: ""
+  #   # Interface name, defaults to "lima0", "lima1", etc.
+  #   interface: ""
+
+# Rules are checked sequentially until the first one matches.
+# portForwards:
+#   - guestPort: 443
+#     default: hostPort: 443
+#     default: guestIP: "127.0.0.1"
+#     default: proto: "tcp"
+#   - guestPortRange: [4000, 4999]
+#     hostIP:  "0.0.0.0"
+#     default: hostPortRange: [4000, 4999]
+#   - guestIP: "127.0.0.2" # overrides the default value "127.0.0.1"
+#     hostIP: "127.0.0.2" # overrides the default value "127.0.0.1"
+#     default: guestPortRange: [1, 65535]
+#     default: hostPortRange: [1, 65535]
+#   - guestPort: 8888
+#     ignore: true (don't forward this port)
+#   # Any port still not matched by a rule will not be forwarded (ignored)
+
+# env:
+#   KEY: value
+
+# Default: true
+propagateProxyEnv: true
+
+# DNS
+useHostResolver: true
+# dns:
+# - 1.1.1.1
+# - 1.0.0.1
+
