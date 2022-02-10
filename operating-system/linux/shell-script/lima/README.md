@@ -1,6 +1,6 @@
 # LIMA
 
-- 官方虛擬機配置範例：
+- 官方虛擬機配置範例：
 
 ```console
 $ /usr/local/Cellar/lima/0.7.2/share/doc/lima/examples
