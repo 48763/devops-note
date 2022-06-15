@@ -1,0 +1,48 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DelegateS3Access",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::<ACCOUNT_ID>:user/<USER_NAME>",
+                    "arn:aws:iam::<ACCOUNT_ID>:user/<USER_NAME>"
+                ]
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::<BUCKET_NAME>",
+                "arn:aws:s3:::<BUCKET_NAME>/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "logs.ap-northeast-1.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::<BUCKET_NAME>"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "logs.ap-northeast-1.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::<BUCKET_NAME>/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                },
+                "ArnEquals": {
+                    "aws:SourceArn": [
+                        "arn:aws:logs:ap-northeast-1:<ACCOUNT_ID>:log-group:/aws/rds/instance/<DATABASE_NAME>/general:*",
+                        "arn:aws:logs:ap-northeast-1:<ACCOUNT_ID>:log-group:/aws/rds/instance/<DATABASE_NAME>/slowquery:*",
+                        "arn:aws:logs:ap-northeast-1:<ACCOUNT_ID>:log-group:/aws/rds/instance/<DATABASE_NAME>/error:*"
+                    ]
+                }
+            }
+        }
+    ]
+}

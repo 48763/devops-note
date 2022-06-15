@@ -18,9 +18,7 @@
                 "arn:aws:rds:ap-northeast-1:<SRC_ACCOUNT_ID>:db:<DATABASE_NAME>",
                 "arn:aws:rds:ap-northeast-1:<SRC_ACCOUNT_ID>:snapshot:rds:<DATABASE_NAME>",
                 "arn:aws:rds:ap-northeast-1:<SRC_ACCOUNT_ID>:snapshot:<SNAPSHOT_NAME>",
-                
-                
-                "arn:aws:kms:ap-northeast-1:<>:key/<>"
+                "arn:aws:kms:ap-northeast-1:<SRC_ACCOUNT_ID>:key/<KMS_ID>"
             ]
         }
     ]
