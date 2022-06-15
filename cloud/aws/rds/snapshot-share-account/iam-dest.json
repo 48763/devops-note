@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rds:DescribeDBSnapshots",
+                "rds:CopyDBSnapshot",
+                "rds:CreateDBSnapshot",
+                "rds:DeleteDBSnapshot",
+                "kms:GetPublicKey",
+                "kms:DescribeKey",
+                "kms:CreateGrant"
+            ],
+            "Resource": [
+                "arn:aws:rds:ap-northeast-1:<SRC_ACCOUNT_ID>:snapshot:<SNAPSHOT_NAME>",
+                "arn:aws:kms:ap-northeast-1:<SRC_ACCOUNT_ID>:key/<KMS_ID>",
+                "arn:aws:rds:ap-northeast-1:<DEST_ACCOUNT_ID>:snapshot:<SNAPSHOT_NAME>"
+            ]
+        }
+    ]
+}
