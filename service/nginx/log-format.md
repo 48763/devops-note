@@ -4,7 +4,7 @@ Specifies log format.
 ## Config
 ```nginx
 
-    log_format timed_combined 'arg_name $arg_name '
+    log_format combined 'arg_name $arg_name '
         ', args $args '
         ', binary_remote_addr $binary_remote_addr '
         ', body_bytes_sent $body_bytes_sent '
@@ -58,7 +58,7 @@ Specifies log format.
         ', time_iso8601 $time_iso8601 '
         ', time_local $time_local ';
 
-    access_log /var/log/nginx/host.log timed_combined;
+    access_log /var/log/nginx/host.log combined;
 
 ```
 
@@ -87,7 +87,7 @@ client address in a binary form, value’s length is always 4 bytes for IPv4 add
 
 ### body_bytes_sent
 
-number of bytes sent to a client, not counting the response header; this variable is compatible with the “%B” parameter of the mod_log_config Apache module
+number of bytes sent to a client, not counting the response header; this variable is compatible with the "%B" parameter of the mod_log_config Apache module
 ```log
 396 
 ```
@@ -117,7 +117,7 @@ current number of requests made through a connection (1.3.8, 1.2.5)
 
 Length of the content sent by the client. The number of bytes in the HTTP body, not including the header. This is not a measurement of the request total size.
 
-“Content-Length” request header field
+"Content-Length" request header field
 ```log
 - 
 ```
@@ -126,7 +126,7 @@ Length of the content sent by the client. The number of bytes in the HTTP body, 
 
 Data type of the content sent by the client in the HTTP message body. Used with queries that have attached information such as POST and PUT. The mime type of the body of the request.
 
-“Content-Type” request header field
+"Content-Type" request header field
 ```log
 - 
 ```
@@ -163,7 +163,7 @@ The value of $uri may change during request processing, e.g. when doing internal
 
 ### host
 
-in this order of precedence: host name from the request line, or host name from the “Host” request header field, or the server name matching a request
+in this order of precedence: host name from the request line, or host name from the "Host" request header field, or the server name matching a request
 ```log
 192.168.200.130 
 ```
@@ -186,14 +186,14 @@ arbitrary request header field; the last part of a variable name is the field na
 
 ON if the request came in through a secure channel (for example, SSL), OFF if the request came through an insecure channel.
 
-“on” if connection operates in SSL mode, or an empty string otherwise
+"on" if connection operates in SSL mode, or an empty string otherwise
 ```log
 
 ```
 
 ### is_args
 
-“?” if a request line has arguments, or an empty string otherwise
+"?" if a request line has arguments, or an empty string otherwise
 ```log
 
 ```
@@ -228,7 +228,7 @@ PID of the worker process
 
 ### pipe
 
-“p” if request was pipelined, “.” otherwise (1.3.12, 1.2.7)
+"p" if request was pipelined, "." otherwise (1.3.12, 1.2.7)
 ```log
 . 
 ```
@@ -310,7 +310,7 @@ At the end of processing, the file needs to be removed. To always write the requ
 
 ### request_completion
 
-“OK” if a request has completed, or an empty string otherwise
+"OK" if a request has completed, or an empty string otherwise
 ```log
 OK 
 ```
@@ -333,7 +333,7 @@ request length (including request line, header, and request body) (1.3.12, 1.2.7
 
 The method used to make the request (GET, POST etc).
 
-request method, usually “GET” or “POST”
+request method, usually "GET" or "POST"
 ```log
 GET 
 
@@ -356,7 +356,7 @@ full original request URI (with arguments)
 
 ### scheme
 
-request scheme, “http” or “https”
+request scheme, "http" or "https"
 ```log
 http 
 ```
@@ -401,7 +401,7 @@ port of the server which accepted a request
 
 The name and revision of the request information protocol. The format is protocol/revision. (The canonicalized form of HTTP_VERSION.)
 
-request protocol, usually “HTTP/1.0”, “HTTP/1.1”, or “HTTP/2.0”
+request protocol, usually "HTTP/1.0", "HTTP/1.1", or "HTTP/2.0"
 ```log
 HTTP/1.1 
 ```
@@ -472,7 +472,7 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like 
 
 ### http_x_forwarded_for
 
-the “X-Forwarded-For” client request header field with the $remote_addr variable appended to it, separated by a comma. If the “X-Forwarded-For” field is not present in the client request header, the $proxy_add_x_forwarded_for variable is equal to the $remote_addr variable.
+the "X-Forwarded-For" client request header field with the $remote_addr variable appended to it, separated by a comma. If the "X-Forwarded-For" field is not present in the client request header, the $proxy_add_x_forwarded_for variable is equal to the $remote_addr variable.
 ```log
 -
 ```
