@@ -4,7 +4,10 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
 
 > 記住，花費一些時間做紀錄，可以在未來遇到的問題時拯救你。
 
-*我所整理的筆記中，大部分用的操作系統是 ***Ubuntu-16.04-server***。*
+> Carry such information in my mind since it is readily available in books. The value of a college education is not the learning of many facts but the training of the mind to think. ~ *Albert Einstein, Einstein: His Life and Universe*
+
+
+*我所整理的筆記中，大部分用的操作系統是 ***Ubuntu***。*
 
 ## 目錄
 ***開頭有 [`*`]，表示未建立，僅有列表；[`@`] 為連結專案。***
