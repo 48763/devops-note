@@ -1,4 +1,4 @@
-# Kubernetes
+# GKE
 
 ```
 $ gcloud container clusters describe sit-onepiece-k8s-tw-01 \
