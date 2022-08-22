@@ -37,7 +37,7 @@ Devops 使用的應用實在是太多了...，腦容量特小的我，實在沒�
 - [持續整合與部署](./cicd)
     - [Jenkins](./Jenkins/#jenkins)
         - [@pipeline(groovy)](https://github.com/48763/jenkins-pipeline)
-    - [Argo CD](./cicd/argocd/#argo-cd)
+    - [Argo CD](./cicd/argocd#argo-cd)
 - [程式設計](./program)
     - [Java](./program/java/)
     - [*Python](./)
