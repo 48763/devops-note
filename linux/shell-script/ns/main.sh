@@ -2,44 +2,50 @@ filter() {
     echo ${1} | grep ${2} &>/dev/null    
 }
 
-server() {
+regular() {
+    echo -e "${1}" | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}"
+}
 
-    ns=$(echo ${1} | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
-
+get_ns_server() {
+    ns=$(regular ${1})
     if [ ! "$ns" ]; then
         continue
     fi
-    output=$(nslookup -type=NS ${ns#*.})
+
+    ns=$(get_host ${ns} | grep -oE "[[:alnum:]]*\.[[:alpha:]]{1,}$")
+
+    output=$(nslookup -type=NS ${ns})
 
     if filter "$output" nsone; then
         echo "${ns}: NS1"
     elif filter "$output" dnspod; then
         echo "${ns}: dnspod"
     else 
-        echo ${output}
+        echo -e "${ns}: ${output}"
     fi
 }
 
-follower() {
+get_host() {
     location=$(curl -Is https://${1} | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
-    if [ ! "${location}" ]; then
+
+    if [ ! "${L}" ];then
         echo ${1}
-    else
+    elif [ "${location}" ]; then
         echo ${location}
+    else
+        echo ${1}
     fi
 }
 
-nslook() { 
-    ns=$(echo ${1} | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
+get_domain() { 
+    ns=$(regular ${1})
     if [ ! "${ns}" ]; then
         continue
     fi
 
-    if [ "${L}" ]; then
-        ns=$(follower ${ns})
-    fi
+    ns=$(get_host ${ns})
 
-    output=$(nslookup ${ns})
+    output=$(nslookup ${ns} 2>&1)
     
     if filter "$output" funnul; then
         js=$(echo ${js} | jq ".funnul += [\"${ns}\"]")
@@ -54,7 +60,7 @@ nslook() {
         cdn="vaicdn\n${cdn}"
 
     else 
-        echo ${output}
+        echo -e "${output}"
     fi
 }
 
@@ -76,19 +82,20 @@ if [ ! "${N}" ]; then
     js={}
     for n in ${@} 
     do  
-        nslook ${n}
+        get_domain ${n}
     done
 
+    echo ""
     for i in $(echo ${cdn} | sort -u)
     do
-        echo "${i}: "
+        echo "- ${i}: "
         echo ""
         echo ${js} | jq -r ".$i[]"
-        echo " - - - "
+        echo ""
     done
 else
     for n in ${@} 
     do  
-        server ${n}
+        get_ns_server ${n}
     done
 fi
