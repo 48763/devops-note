@@ -1,3 +1,4 @@
+#!/bin/sh
 filter() {
     echo ${1} | grep ${2} &>/dev/null    
 }
@@ -51,11 +52,11 @@ get_domain() {
         js=$(echo ${js} | jq ".funnul += [\"${ns}\"]")
         cdn="funnul\n${cdn}"
 
-    elif filter "$output" "site\|hkssm"; then
+    elif filter "$output" site; then
         js=$(echo ${js} | jq ".asia += [\"${ns}\"]")
         cdn="asia\n${cdn}"
 
-    elif filter "$output" yunhucdn; then
+    elif filter "$output" "yunhucdn\|hkssm"; then
         js=$(echo ${js} | jq ".vaicdn += [\"${ns}\"]")
         cdn="vaicdn\n${cdn}"
 
@@ -86,7 +87,7 @@ if [ ! "${N}" ]; then
     done
 
     echo ""
-    for i in $(echo ${cdn} | sort -u)
+    for i in $(echo -e "${cdn}" | sort -u)
     do
         echo "- ${i}: "
         echo ""

@@ -1,0 +1,6 @@
+FROM alpine
+
+RUN apk add curl jq
+COPY ./main.sh /bin/ns
+
+ENTRYPOINT ["ns"]
