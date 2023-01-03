@@ -27,7 +27,7 @@ get_ns_server() {
 }
 
 get_host() {
-    location=$(curl -Is https://${1} | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
+    location=$(curl -Is https://${1} | grep location | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
 
     if [ ! "${L}" ];then
         echo ${1}
