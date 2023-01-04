@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 filter() {
     echo ${1} | grep ${2} &>/dev/null    
 }
