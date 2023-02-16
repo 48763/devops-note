@@ -1,4 +1,5 @@
 #!/bin/bash
+#set -x
 filter() {
     echo ${1} | grep ${2} &>/dev/null    
 }
@@ -21,6 +22,8 @@ get_ns_server() {
         echo "${ns}: NS1"
     elif filter "$output" dnspod; then
         echo "${ns}: dnspod"
+    elif filter "$output" cloudflare; then
+        echo "${ns}: cloudflare"
     else 
         echo -e "${ns}: ${output}"
     fi
@@ -56,9 +59,13 @@ get_domain() {
         js=$(echo ${js} | jq ".asia += [\"${ns}\"]")
         cdn="asia\n${cdn}"
 
-    elif filter "$output" "yunhucdn\|hkssm"; then
+    elif filter "$output" "yunhucdn\|hkssm\|hknui"; then
         js=$(echo ${js} | jq ".vaicdn += [\"${ns}\"]")
         cdn="vaicdn\n${cdn}"
+    elif filter "$output" "byteshieldcdn"; then
+        js=$(echo ${js} | jq ".korims += [\"${ns}\"]")
+        cdn="korims\n${cdn}"
+
 
     else 
         echo -e "${output}"
