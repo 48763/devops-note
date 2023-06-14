@@ -20,7 +20,6 @@ fi
 ##
 # Generate configuration
 ##
-
 ssh-keygen -t rsa -b 4096 -f key/$1/$2 -q -N ""
 
 echo "Host $2" >> config
@@ -34,7 +33,6 @@ Host $2
 ##
 # SSH_ENV
 ##
-
 export DISPLAY=:0
 export SSH_ASKPASS=/tmp/ssh_askpass
 
@@ -46,7 +44,6 @@ chmod +x $SSH_ASKPASS
 ##
 # Host configure ssh key
 ##
-
 setsid ssh-copy-id -f -i ~/.ssh/key/$1/$2 beladmin@$3
 rm $SSH_ASKPASS
 
