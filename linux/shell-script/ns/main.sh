@@ -1,102 +1,111 @@
 #!/bin/bash
 filter() {
+    # text com-key-word
     echo ${1} | grep ${2} &>/dev/null    
 }
 
-regular() {
+dm_regular() {
+    # text
     echo -e "${1}" | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}"
 }
 
-get_ns_server() {
-    ns=$(regular ${1})
-    if [ ! "$ns" ]; then
-        continue
-    fi
-
-    ns=$(get_host ${ns} | grep -oE "[[:alnum:]]*\.[[:alpha:]]{1,}$")
-
-    output=$(nslookup -type=NS ${ns})
-
-    if filter "$output" nsone; then
-        echo "${ns}: NS1"
-    elif filter "$output" dnspod; then
-        echo "${ns}: dnspod"
-    else 
-        echo -e "${ns}: ${output}"
-    fi
+ip_regular() {
+    # text
+    echo -e "${1}" | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
 }
 
 get_host() {
-    location=$(curl -Is https://${1} | grep ^location | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
+    location=$(curl -Is -w 5 http://${1} | grep ^location | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
 
-    if [ ! "${L}" ];then
-        echo ${1}
-    elif [ "${location}" ]; then
+    if [ "${L}" ] && [ "${location}" ]; then
         echo ${location}
+    elif [ "${type}" ]; then
+        echo ${1} | grep -oE "[[:alnum:]]*\.[[:alpha:]]{1,}$"
     else
         echo ${1}
     fi
 }
 
-get_domain() { 
-    ns=$(regular ${1})
-    if [ ! "${ns}" ]; then
-        continue
-    fi
+ns_cmd() {
+    nslookup $([ ! ${type} ] || echo -type=${type}) ${1} $([ ! ${dns} ] || echo ${dns}) 2>&1
+}
 
-    ns=$(get_host ${ns})
+class() {
 
-    output=$(nslookup ${ns} 2>&1)
-    
-    if filter "$output" funnul; then
-        js=$(echo ${js} | jq ".funnul += [\"${ns}\"]")
-        cdn="funnul\n${cdn}"
-
-    elif filter "$output" site; then
-        js=$(echo ${js} | jq ".asia += [\"${ns}\"]")
-        cdn="asia\n${cdn}"
-
-    elif filter "$output" "yunhucdn\|hkssm"; then
-        js=$(echo ${js} | jq ".vaicdn += [\"${ns}\"]")
-        cdn="vaicdn\n${cdn}"
-
+    if filter "${1}" funnul; then
+        js=$(echo ${js} | jq ".funnul += [\"${2}\"]")
+        com="funnul\n${com}"
+    elif filter "${1}" site; then
+        js=$(echo ${js} | jq ".asia += [\"${2}\"]")
+        com="asia\n${com}"
+    elif filter "${1}" "yunhucdn\|hkssm"; then
+        js=$(echo ${js} | jq ".vaicdn += [\"${2}\"]")
+        com="vaicdn\n${com}"
+    elif filter "${1}" "hknui"; then
+        js=$(echo ${js} | jq ".korims += [\"${2}\"]")
+        com="korims\n${com}"
+    elif filter "${1}" nsone; then
+        js=$(echo ${js} | jq ".ns1 += [\"${2}\"]")
+        com="ns1\n${com}"
+    elif filter "${1}" dnspod; then
+        js=$(echo ${js} | jq ".dnspod += [\"${2}\"]")
+        com="dnspod\n${com}"
+    elif filter "${1}" cloudflare; then
+        js=$(echo ${js} | jq ".cloudflare += [\"${2}\"]")
+        com="cloudflare\n${com}"
     else 
         echo -e "${output}"
     fi
 }
 
-for i in ${@}
+get_record_address() { 
+    dm=$(dm_regular ${1})
+    if [ ! "${dm}" ]; then
+        continue
+    fi
+
+    dm=$(get_host ${dm})
+    
+    output=$(ns_cmd ${dm})
+
+    class "${output}" ${dm}
+}
+
+while [ ${#} -gt 0 ]
 do
-    case ${i} in 
+    case ${1} in 
         -L)
             L="1"
         ;;
-        -N)
-            N="1"
+        -n)
+            dns="${2}"
+            shift 1
+        ;;
+        -t)
+            type="${2}"
+            shift 1
+        ;;
+        *)
+            domains="${1} ${domains}"
         ;;
     esac
+
+    shift 1
 done
 
+com=""
+js={}
 
-if [ ! "${N}" ]; then
-    cdn=""
-    js={}
-    for n in ${@} 
-    do  
-        get_domain ${n}
-    done
+for dm in ${domains} 
+do  
+    get_record_address ${dm}
+done
 
+echo ""
+for i in $(echo -e "${com}" | sort -u)
+do
+    echo "- ${i}: "
     echo ""
-    for i in $(echo -e "${cdn}" | sort -u)
-    do
-        echo "- ${i}: "
-        echo ""
-        echo ${js} | jq -r ".$i[]"
-        echo ""
-    done
-else
-    for n in ${@} 
-    do  
-        get_ns_server ${n}
-    done
-fi
+    echo ${js} | jq -r ".$i[]"
+    echo ""
+done
