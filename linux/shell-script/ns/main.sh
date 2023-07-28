@@ -1,7 +1,7 @@
 #!/bin/bash
 filter() {
     # text com-key-word
-    echo ${1} | grep ${2} &>/dev/null    
+    echo -e "${1}" | grep "${2}" &>/dev/null    
 }
 
 dm_regular() {
@@ -11,7 +11,9 @@ dm_regular() {
 
 ip_regular() {
     # text
-    echo -e "${1}" | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
+    echo -e "${1}" \
+    | grep -v "Server\|#53$" \
+    | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
 }
 
 get_host() {
@@ -53,8 +55,12 @@ class() {
     elif filter "${1}" cloudflare; then
         js=$(echo ${js} | jq ".cloudflare += [\"${2}\"]")
         com="cloudflare\n${com}"
-    else 
-        echo -e "${output}"
+    elif filter "${1}" "No answer"; then
+        js=$(echo ${js} | jq ".no_answer += [\"${2}\"]")
+        com="no_answer\n${com}"
+    else
+        echo -e "${2}: \n"
+        ip_regular "${output}"
     fi
 }
 
