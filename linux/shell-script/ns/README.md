@@ -30,12 +30,20 @@ $ ./main "https://github.com/48763(test) https://yayuyo.yt(youtybe)"
 $ ./main https://github.com/48763 https://yayuyo.yt/ -L
 ```
 
-### 名稱伺服器
+### 解析種類
 
-添加 `-n`，就會返回域名的名稱伺服器解析：
+添加 `-t <record_type>`，就會帶入解析種類：
 
 ```
-$ ./main https://github.com/48763 https://yayuyo.yt/ -n
+$ ./main https://github.com/48763 https://yayuyo.yt/ -t ns
+```
+
+### 指定 DNS
+
+添加 `-n <dns_ip_address>`，就能指定 DNS：
+
+```
+$ ./main https://github.com/48763 https://yayuyo.yt/ -n 8.8.8.8
 ```
 
 ## Docker
