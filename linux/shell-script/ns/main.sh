@@ -12,7 +12,7 @@ dm_regular() {
 ip_regular() {
     # text
     echo -e "${1}" \
-    | grep -v "Server\|#53$" \
+    | grep -v "Server\|#53$\|:53" \
     | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
 }
 
