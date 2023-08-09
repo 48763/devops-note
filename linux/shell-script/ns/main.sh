@@ -12,8 +12,9 @@ dm_regular() {
 ip_regular() {
     # text
     echo -e "${1}" \
-    | grep -v "Server\|#53$\|:53" \
+    | grep -v "Server\|#53\|:53" \
     | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
+    echo ""
 }
 
 get_host() {
@@ -58,8 +59,11 @@ class() {
     elif filter "${1}" "No answer"; then
         js=$(echo ${js} | jq ".no_answer += [\"${2}\"]")
         com="no_answer\n${com}"
+    elif filter "${1}" "NXDOMAIN"; then
+        js=$(echo ${js} | jq ".non_existent += [\"${2}\"]")
+        com="non_existent\n${com}"
     else
-        echo -e "${2}: \n"
+        echo -e "- ${2}: \n"
         ip_regular "${output}"
     fi
 }
