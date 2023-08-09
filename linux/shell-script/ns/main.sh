@@ -41,7 +41,7 @@ class() {
     elif filter "${1}" site; then
         js=$(echo ${js} | jq ".asia += [\"${2}\"]")
         com="asia\n${com}"
-    elif filter "${1}" "yunhucdn\|hkssm"; then
+    elif filter "${1}" "yunhucdn\|hkssm\|hkcmm"; then
         js=$(echo ${js} | jq ".vaicdn += [\"${2}\"]")
         com="vaicdn\n${com}"
     elif filter "${1}" "hknui"; then
