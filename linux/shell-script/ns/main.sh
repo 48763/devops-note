@@ -18,7 +18,7 @@ ip_regular() {
 }
 
 get_host() {
-    location=$(curl -Is -w 5 http://${1} | grep ^location | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
+    location=$(curl -Is -m 5 http://${1} | grep ^location | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
 
     if [ "${L}" ] && [ "${location}" ]; then
         echo ${location}
