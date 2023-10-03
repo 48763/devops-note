@@ -6,7 +6,7 @@ filter() {
 
 dm_regular() {
     # text
-    echo -e "${1}" | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}"
+    echo -e "${1}" | grep -oE "[[:alnum:].-]*\.[[:alpha:]]{1,}"
 }
 
 ip_regular() {
@@ -38,7 +38,7 @@ class() {
     if filter "${1}" funnul; then
         js=$(echo ${js} | jq ".funnul += [\"${2}\"]")
         com="funnul\n${com}"
-    elif filter "${1}" site; then
+    elif filter "${1}" site-; then
         js=$(echo ${js} | jq ".asia += [\"${2}\"]")
         com="asia\n${com}"
     elif filter "${1}" "yunhucdn\|hkssm\|hkcmm"; then
