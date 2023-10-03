@@ -129,7 +129,6 @@ networks:
 propagateProxyEnv: true
 
 # DNS
-useHostResolver: true
 # dns:
 # - 1.1.1.1
 # - 1.0.0.1
