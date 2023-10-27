@@ -1,0 +1,4 @@
+storage=list
+domain_expire="604800"
+cert_expire="6912000"
+interval="1"
