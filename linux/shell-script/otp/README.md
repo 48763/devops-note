@@ -8,14 +8,14 @@
 $ brew install zbar
 ```
 
-將腳本移至 `PATH` 會引入的目錄中:
+將腳本移至 `PATH` 會引入的目錄中：
 
 ```
 $ PATH="${PATH}:~/tools"
 $ mv otp totp ~/tools
 ```
 
-創建存放 qrcode 目錄:
+創建存放 qrcode 目錄：
 
 ```
 $ mkdir ~/.qrcode
