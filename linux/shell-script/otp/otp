@@ -9,10 +9,6 @@ get_code() {
         | totp
 }
 
-search() {
-    echo 123
-}
-
 ask_setting() {
     echo "${list}\n"
     read -er -p "Please input qrcode file name: " qr_name
