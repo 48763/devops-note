@@ -47,6 +47,9 @@ class() {
     elif filter "${1}" "hknui"; then
         js=$(echo ${js} | jq ".korims += [\"${2}\"]")
         com="korims\n${com}"
+    elif filter "${1}" "pscddos"; then
+        js=$(echo ${js} | jq ".polar += [\"${2}\"]")
+        com="polar\n${com}"
     elif filter "${1}" nsone; then
         js=$(echo ${js} | jq ".ns1 += [\"${2}\"]")
         com="ns1\n${com}"
