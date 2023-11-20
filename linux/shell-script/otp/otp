@@ -1,5 +1,5 @@
 #!/bin/sh
-qr_folder="/Users/${users}/.qrcode"
+qr_folder="/Users/$(users)/.qrcode"
 list=$(ls -1 ${qr_folder})
 
 get_code() {
