@@ -60,7 +60,7 @@ net.core.somaxconn = 4096
 
 > Old versions of Linux kernel have nasty bug of truncating somaxcon value to it's 16 lower bits (i.e. casting value to uint16_t), so raising that value to more than 65535 can even be dangerous. 
 
-全連接調整完後，就要考慮半連接是否足夠，因為當半連接佇列不足時，就會丟棄後面到達的 **SYN**，所以這是需要評估的一環：
+全連接調整完後，就要考慮半連接是否足夠，因為當半連接佇列不足時，就會丟棄後面接收的 **SYN**，所以這是需要評估的一環：
 
 ```
 $ sysctl -a | grep tcp_max_syn_backlog
@@ -77,10 +77,12 @@ net.ipv4.tcp_max_syn_backlog = 4096
 >> https://github.com/torvalds/linux/blob/v3.19-rc7/net/core/request_sock.c#L48
 >>
 
-如果有啟用 `tcp_syncookies`，可以忽略半連接設置。
+> 如果有啟用 `tcp_syncookies`，可以忽略半連接設置。
+
+使用下面指令，查看目前 tcp 狀態為 `SYN-RECV` 的連線數：
 
 ```
-$ ss -at | grep  SYN-RECV
+$ ss -at | grep SYN-RECV | wc -l
 ```
 
 
