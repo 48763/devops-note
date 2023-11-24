@@ -79,29 +79,10 @@ net.ipv4.tcp_max_syn_backlog = 4096
 
 > 如果有啟用 `tcp_syncookies`，可以忽略半連接設置。
 
-使用下面指令，查看目前 tcp 狀態為 `SYN-RECV` 的連線數：
+使用下面指令，查看目前 tcp 狀態為 `SYN-RECV` 的連線數，如果該數值過高，也得適時調整 `tcp_max_syn_backlog`：
 
 ```
 $ ss -at | grep SYN-RECV | wc -l
-```
-
-
-```
-$ sysctl -a | grep net.ipv4.tcp_abort_on_overflow
-```
-
-
-暫時調整：
-
-```
-$ sysctl -w net.core.somaxconn=4096
-```
-
-永久調整
-
-```
-$ vi /etc/sysctl.conf
-net.core.somaxconn=4096
 ```
 
 ## Reuseport
