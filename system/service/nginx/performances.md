@@ -85,6 +85,16 @@ net.ipv4.tcp_max_syn_backlog = 4096
 $ ss -at | grep SYN-RECV | wc -l
 ```
 
+或是利用監控判斷頻寬狀況，或是 `tcpdump` 判斷伺服器端的 `SYN-ACK` 狀況，用以調整下面參數：
+
+```
+$ sysctl -a | grep tcp_synack_retries
+net.ipv4.tcp_synack_retries = 5
+```
+
+> 有關 RTO (retransmission timeout) 可以參考此[文章](https://sgros.blogspot.com/2012/02/calculating-tcp-rto.html)，並搭配伺服器的 timeout 進行調整。
+
+
 ## Reuseport
 
 ```
