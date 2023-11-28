@@ -34,7 +34,7 @@ ns_cmd() {
 }
 
 get_cname() {
-    cname=$(echo "${1}" | grep canonical)
+    cname=$(echo "${1}" | grep canonical | head -1)
     echo "${cname#*= }"
 }
 
