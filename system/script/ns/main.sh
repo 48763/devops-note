@@ -33,13 +33,18 @@ ns_cmd() {
     nslookup $([ ! ${type} ] || echo -type=${type}) ${1} $([ ! ${dns} ] || echo ${dns}) 2>&1
 }
 
+get_cname() {
+    cname=$(echo "${1}" | grep canonical)
+    echo "${cname#*= }"
+}
+
 class() {
 
     if filter "${1}" funnul; then
         js=$(echo ${js} | jq ".funnul += [\"${2}\"]")
         com="funnul\n${com}"
     elif filter "${1}" site-; then
-        js=$(echo ${js} | jq ".asia += [\"${2}\"]")
+        js=$(echo ${js} | jq ".asia.\"$(get_cname "${1}")\" += [\"${2}\"]")
         com="asia\n${com}"
     elif filter "${1}" "yunhucdn\|hkssm\|hkcmm"; then
         js=$(echo ${js} | jq ".vaicdn += [\"${2}\"]")
@@ -119,6 +124,6 @@ for i in $(echo -e "${com}" | sort -u)
 do
     echo "- ${i}: "
     echo ""
-    echo ${js} | jq -r ".$i[]"
+    echo ${js} | jq -r ".$i"
     echo ""
 done
