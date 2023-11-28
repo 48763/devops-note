@@ -124,6 +124,18 @@ for i in $(echo -e "${com}" | sort -u)
 do
     echo "- ${i}: "
     echo ""
-    echo ${js} | jq -r ".$i"
+
+    keys=$(echo ${js} | jq -r ".$i | keys[]")
+    if [ "0" == "${keys}" ]; then
+        echo ${js} | jq -r ".$i[]"
+    else
+        for k in ${keys}
+        do
+            echo "-- ${k%\.}: "
+            echo ""
+            echo ${js} | jq -r ".$i.\"$k\"[]"
+            echo ""
+        done
+    fi
     echo ""
 done
