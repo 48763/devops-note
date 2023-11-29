@@ -105,6 +105,8 @@ server {
 
 > https://veithen.io/2014/01/01/how-tcp-backlog-works-in-linux.html
 
+詳細分析的參考[文章](https://yishenggong.com/2023/06/05/nginx-reuseport-causes-occasional-lag-cn/)。
+
 ## TW
 
 ```
