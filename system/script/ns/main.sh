@@ -126,7 +126,7 @@ do
     echo ""
 
     keys=$(echo ${js} | jq -r ".$i | keys[]")
-    if [ "0" == "${keys}" ]; then
+    if [ "0" == ${keys:0:1} ]; then
         echo ${js} | jq -r ".$i[]"
     else
         for k in ${keys}
