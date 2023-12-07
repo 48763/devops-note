@@ -6,7 +6,7 @@ filter() {
 
 dm_regular() {
     # text
-    echo -e "${1}" | grep -oE "[[:alnum:].-]*\.[[:alpha:]]{1,}"
+    echo -e "${1}" | grep -oE "[[:alnum:].-]*\.[[:alpha:]]{1,}[\:[:digit:]]*"
 }
 
 ip_regular() {
@@ -22,10 +22,10 @@ get_host() {
 
     if [ "${L}" ] && [ "${location}" ]; then
         echo ${location}
-    elif [ "${type}" ]; then
+    elif [ "${type}" ] && [ "${location}" ]; then
         echo ${1} | grep -oE "[[:alnum:]]*\.[[:alpha:]]{1,}$"
     else
-        echo ${1}
+        echo ${1%:*}
     fi
 }
 
