@@ -18,14 +18,15 @@ ip_regular() {
 }
 
 get_host() {
-    location=$(curl -Is -m 5 http://${1} | grep "^location\|^Location" | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
+    
+    if [ "${L}" ]; then
+        location=$(curl -Is -m 3 http://${1} | grep "^location\|^Location" | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
+    fi
 
-    if [ "${L}" ] && [ "${location}" ]; then
-        echo ${location}
-    elif [ "${type}" ] && [ "${location}" ]; then
-        echo ${1} | grep -oE "[[:alnum:]]*\.[[:alpha:]]{1,}$"
+    if [ ns == "${type}" ]; then
+        echo ${location:=${1%:*}} | grep -oE "[[:alnum:]]*\.[[:alpha:]]{1,}$"
     else
-        echo ${1%:*}
+        echo ${location:=${1%:*}}
     fi
 }
 
@@ -49,12 +50,6 @@ class() {
     elif filter "${1}" "yunhucdn\|hkssm\|hkcmm"; then
         js=$(echo ${js} | jq ".vaicdn += [\"${2}\"]")
         com="vaicdn\n${com}"
-    elif filter "${1}" "hknui"; then
-        js=$(echo ${js} | jq ".korims += [\"${2}\"]")
-        com="korims\n${com}"
-    elif filter "${1}" "pscddos"; then
-        js=$(echo ${js} | jq ".polar += [\"${2}\"]")
-        com="polar\n${com}"
     elif filter "${1}" nsone; then
         js=$(echo ${js} | jq ".ns1 += [\"${2}\"]")
         com="ns1\n${com}"
