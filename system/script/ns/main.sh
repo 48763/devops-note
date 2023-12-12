@@ -92,6 +92,9 @@ get_record_address() {
 while [ ${#} -gt 0 ]
 do
     case ${1} in 
+        -d|-D)
+            d="1"
+        ;;
         -L)
             L="1"
         ;;
@@ -110,6 +113,10 @@ do
 
     shift 1
 done
+
+if [ "${d}" ]; then
+    set -x
+fi
 
 com=""
 js={}
