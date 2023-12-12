@@ -9,12 +9,20 @@ dm_regular() {
     echo -e "${1}" | grep -oE "[[:alnum:].-]*\.[[:alpha:]]{1,}[\:[:digit:]]*"
 }
 
-ip_regular() {
+record_regular() {
     # text
-    echo -e "${1}" \
-    | grep -v "Server\|#53\|:53" \
-    | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
-    echo ""
+
+    if [ ns == "${type}" ]; then
+        echo -e "${1}" \
+        | grep -o "nameserver.*" \
+        | grep -Eo "[[:alnum:].-]*\.[[:alpha:]]{1,}[\:[:digit:]]*"
+        echo ""
+    else
+        echo -e "${1}" \
+        | grep -v "Server\|#53\|:53" \
+        | grep -oE "[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*\.[[:digit:]]*"
+        echo ""
+    fi
 }
 
 get_host() {
@@ -67,7 +75,7 @@ class() {
         com="non_existent\n${com}"
     else
         echo -e "- ${2}: \n"
-        ip_regular "${output}"
+        record_regular "${output}"
     fi
 }
 
