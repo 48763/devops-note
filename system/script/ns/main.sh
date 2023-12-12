@@ -26,6 +26,7 @@ record_regular() {
 }
 
 get_host() {
+    location=""
     
     if [ "${L}" ]; then
         location=$(curl -Is -m 3 http://${1} | grep "^location\|^Location" | grep -oE "[[:alnum:].]*\.[[:alpha:]]{1,}")
@@ -49,10 +50,7 @@ get_cname() {
 
 class() {
 
-    if filter "${1}" funnul; then
-        js=$(echo ${js} | jq ".funnul += [\"${2}\"]")
-        com="funnul\n${com}"
-    elif filter "${1}" site-; then
+    if filter "${1}" site-; then
         js=$(echo ${js} | jq ".asia.\"$(get_cname "${1}")\" += [\"${2}\"]")
         com="asia\n${com}"
     elif filter "${1}" "yunhucdn\|hkssm\|hkcmm"; then
@@ -75,7 +73,7 @@ class() {
         com="non_existent\n${com}"
     else
         echo -e "- ${2}: \n"
-        record_regular "${output}"
+        record_regular "${1}"
     fi
 }
 
@@ -85,11 +83,15 @@ get_record_address() {
         continue
     fi
 
-    dm=$(get_host ${dm})
-    
-    output=$(ns_cmd ${dm})
+    location=$(get_host ${dm})
+    dns_output=$(ns_cmd ${location})
 
-    class "${output}" ${dm}
+    if [ "${L}" ] && [ ! "${dm}" = "${location}" ] ; then
+        class "${dns_output}" "${dm} => ${location}"
+    else
+        class "${dns_output}" "${location}"
+    fi
+
 }
 
 while [ ${#} -gt 0 ]
