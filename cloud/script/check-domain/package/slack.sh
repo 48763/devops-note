@@ -13,7 +13,7 @@ elif [[ -n ${SLACK_WEBHOOK} ]]; then
 else
   echo "INFO: Using default Slack API endpoint to POST messages..."
 
-  WEBHOOK="https://hooks.slack.com/services/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"
+  WEBHOOK="https://hooks.slack.com/services/<slack-token>"
   #WEBHOOK=${WEBHOOK-'https://hooks.slack.com/services/'}
 fi
 
