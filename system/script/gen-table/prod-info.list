@@ -7,12 +7,12 @@ R Build
 R Deploy
 
 
-L APP_NAME https://yayuyo.yt
+L https://yayuyo.yt APP_NAME
 S [![Build Status](../../../img/system/script/gen-table.png)](https://yayuyo.yt) 
 S `Linux` 
 S `Container` 
-L PROJECT_NAME https://yayuyo.yt
-L CI_BUILD_NAME https://yayuyo.yt
-L CD_DEPLOY_NAME https://yayuyo.yt
+L https://yayuyo.yt PROJECT_NAME
+L https://yayuyo.yt CI_BUILD_NAME
+L https://yayuyo.yt CD_DEPLOY_NAME
 
 ---

@@ -27,7 +27,11 @@ set_info_row() {
     case $1 in
         L|l)
             shift 1
-            echo " [${1}](${2}) "
+
+            url="(${1})"
+            shift 1
+            
+            echo "[${@}]${url} "
             ;;
         S|s)
             shift 1
