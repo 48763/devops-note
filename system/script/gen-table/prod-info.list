@@ -1,0 +1,18 @@
+L App Name
+M CD Status
+R System
+R Type
+R Project
+R Build
+R Deploy
+
+
+L APP_NAME https://yayuyo.yt
+S [![Build Status](../../../img/system/script/gen-table.png)](https://yayuyo.yt) 
+S `Linux` 
+S `Container` 
+L PROJECT_NAME https://yayuyo.yt
+L CI_BUILD_NAME https://yayuyo.yt
+L CD_DEPLOY_NAME https://yayuyo.yt
+
+---

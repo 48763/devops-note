@@ -4,6 +4,7 @@
 
 ## 列表
 
+- [gen-table](#gen-table)
 - [lmc](#lmc)
 - [ns](#ns)
 - [otp](#otp)
@@ -11,6 +12,10 @@
 - [rename](#rename)
 
 ## 介紹
+
+### [gen-table](./gen-table)
+
+`gen-table` 透過撰寫 `info.list`，輸出 MarkDown 的表格語法，之後直接貼進 `.md` 文件即可。
 
 ### [lmc](./lima)
 
