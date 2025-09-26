@@ -7,6 +7,8 @@
 - 擴展的正則表達式（Extended Regular Expression 又叫Extended RegEx 簡稱EREs）
 - Perl的正則表達式（Perl Regular Expression 又叫Perl RegEx 簡稱PREs）
 
+> [案例](#案例)
+
 ## 基本組成部分
 
 正則表達式的基本組成部分。
@@ -68,3 +70,11 @@ POSIX字符類是一個形如[:...:]的特殊元序列（meta sequence），他�
 | \t | 橫向製表符 | \t 匹配一個橫向製表符 | 不支持 | 不支持 | \t | \t |
 | \v | 垂直製表符 | \v 匹配一個垂直製表符 | 不支持 | 不支持 | \v | \v |
 | \f | 換頁符 | \f 匹配一個換頁符 | 不支持 | 不支持 | \f | \f |
+
+## 案例
+
+```
+$ echo "a.b#c[d]e" | sed 's/[]#.[]/X/g'
+```
+
+> 這樣子才能匹配 `[` 和 `]` 這兩字符。假如 `[` 與 `]` 之間有其它字符，將會結束集合。
