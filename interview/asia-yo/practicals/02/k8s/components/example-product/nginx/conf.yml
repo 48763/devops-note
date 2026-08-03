@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  template:
+    spec:
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+      - name: static-content
+        persistentVolumeClaim:
+          claimName: static-content
+          readOnly: true
+      containers:
+      - name: pod-name
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx/conf.d
+          readOnly: true
+        - name: static-content
+          mountPath: /usr/share/nginx/html
+          readOnly: true

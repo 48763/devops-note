@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment 
+spec:
+  template:
+    spec:
+      containers:
+      - name: pod-name
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1500Mi
+          requests:
+            cpu: 300m
+            memory: 800Mi

@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: path-prefix
+  labels:
+    purpose: path-prefix
+spec:
+  replacePathRegex:
+    regex: ^/api/(.*)
+    replacement: /${1}
+

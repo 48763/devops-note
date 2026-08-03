@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: static-content
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: asiayo-static-content
+    volumeAttributes:
+      shareName: static-content
+    nodeStageSecretRef:
+      name: azure-storage-secret
+      namespace: asiayo
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: static-content
+spec:
+  accessModes:
+  - ReadOnlyMany
+  storageClassName: ""
+  volumeName: static-content
+  resources:
+    requests:
+      storage: 10Gi

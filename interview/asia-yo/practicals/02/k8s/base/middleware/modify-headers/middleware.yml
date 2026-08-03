@@ -1,0 +1,10 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: modify-headers
+  labels:
+    purpose: modify-headers
+spec:
+  headers:
+    customRequestHeaders:
+      Host: "dev.asiayo.com"

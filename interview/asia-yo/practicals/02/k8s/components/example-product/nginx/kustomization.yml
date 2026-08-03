@@ -1,0 +1,56 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: example
+
+resources:
+- ../../../base/deployment
+- ../../../base/service
+- ../../../base/pdb
+- ../../../base/hpa
+
+labels:
+- includeSelectors: true
+  pairs:
+    asiayo.com/app: nginx
+    asiayo.com/product: example-product
+
+images:
+- name: image
+  newName: 48763/nginx
+  newTag: latest
+
+# patchesStrategicMerge:
+# - mount.yaml
+
+patches:
+- path: conf.yml
+- patch: |-
+    - op: replace
+      path: /metadata/name
+      value: nginx
+  target:
+    kind: .*
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/name
+      value: nginx
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/ports/0/containerPort
+      value: 80
+  target:
+    kind: Deployment
+- patch: |-
+    - op: remove
+      path: /spec/replicas
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/scaleTargetRef/name
+      value: nginx
+  target:
+    kind: HorizontalPodAutoscaler

@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-slash
+  labels:
+    purpose: redirect-slash
+spec:
+  redirectRegex:
+    regex: ^https://dev.asiayo.com/api$
+    replacement: https://dev.asiayo.com/api/
+    permanent: true

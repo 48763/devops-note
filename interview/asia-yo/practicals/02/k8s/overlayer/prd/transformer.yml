@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: PrefixSuffixTransformer
+metadata:
+  name: not-important-to-example
+prefix: prd-
+fieldSpecs:
+- path: spec/routes[]/middlewares/name[]
+- path: spec/routes[]/services/name
+- path: /spec/csi/nodeStageSecretRef/namespace
+- path: /spec/csi/volumeHandle
